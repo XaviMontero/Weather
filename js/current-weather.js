@@ -41,7 +41,7 @@ function setcurrentWeather( $currentWeatherCity, name){
 }
 
 function setBackground($el, status){
-  $el.style.backgroundImage = `url("../img/${status}.jpg")`;
+  $el.style.backgroundImage = `url("../Weather/img/${status}.jpg")`;
   //  style.backgroundImage
 }
 
