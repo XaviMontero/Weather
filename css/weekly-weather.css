@@ -34,3 +34,13 @@
   inset-inline-end: 0;
 }
 
+
+.weelyDescription{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin:1rem ;
+  padding: 1rem;
+  color: var(--white);
+  font: var(--body1-regular);
+
+}

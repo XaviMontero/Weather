@@ -11,6 +11,14 @@ export function formantDate (date, config = defaultDateOptions){
 export function formatTemp(value){
   return `${Math.floor(value)}°`
 }
+export function formatKm(value){
+  return `${Math.floor(value)} km-h`
+}
+
+export function formatHume(value){
+  return `${Math.floor(value)} %`
+}
+
 
 export function formatWeekList(rawData){
   const weekList = [] ;

@@ -20,6 +20,11 @@
   background: var(--black);
   border-radius: 58px;
   padding-block: 1rem;
+  z-index: 1;
+}
+
+.dayWeather-item:active {
+   transform: scale(.9);
 }
 
 .dayWeather-item > * {

@@ -3,6 +3,7 @@ import {getLatLon} from './geolocation.js';
 import {getWeeklyWeather} from './service/weather.js'
 import {formatWeekList, createDOM,formantDate,formatTemp } from './formatData.js';
 import draggble from './draggble.js';
+import {configDayTabs} from "./dayTabs.js"
 
 function tabPanelTemplate (index){
   return`
@@ -15,9 +16,9 @@ function tabPanelTemplate (index){
   </div>`
 }
 
-function tabDayTempleate ({temp,date,icon,description}){
+function tabDayTempleate ({index,idPanel,temp,date,icon,description}){
  return `
-    <li class="dayWeather-item is-selected">
+    <li  class="dayWeather-item" id="${index}-${idPanel}">
       <span class="dayWeather-time">${date}</span>
       <img class="dayWeather-icon" height="48" width="48" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}" rain="">
       <span class="dayWeather-temp">${temp}</span>
@@ -31,13 +32,15 @@ function createTabPanel(id){
   return $panel
 }
 
-function createDayPanel(weather){
+function createDayPanel(weather,index, idPanel){
   const dateOption = {
     hour:'numeric',
     hour12:true,
 
   }
   const config = {
+    index:index,
+    idPanel:idPanel,
     temp: formatTemp(weather.main.temp),
     date: formantDate((weather.dt*1000),dateOption),
     icon: weather.weather[0].icon,
@@ -62,11 +65,12 @@ export default async function weekly(){
 
 function configCurrentWeekly(weekly){
   const $container = document.querySelector ('.tabs');
-  weekly.forEach((item,index) => {
-      const $panel =createTabPanel(index);
+  weekly.forEach((item,idPanel) => {
+      const $panel =createTabPanel(idPanel);
       $container.append( $panel);
-       item.forEach(weather => {
-        $panel.querySelector('.dayWeather-list').append(createDayPanel(weather));
+       item.forEach((weather,index) => {
+        $panel.querySelector('.dayWeather-list').append(createDayPanel(weather,index, idPanel));
        });
   });
+  configDayTabs(weekly);
 }

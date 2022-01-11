@@ -2,6 +2,7 @@ const $tabs = document.querySelector('#tabs');
 
 const $tabList = $tabs.querySelectorAll('.tab');
 
+
 const toDay = new Date();
 let weekday = toDay.getDay();
 
@@ -19,6 +20,8 @@ function nextDay(day){
   return day === 6 ? 0 : day+1;
 }
 
+
+
 $tabList.forEach(($element, index) => {
   $element.addEventListener('click', habdelSelectTabClick )
   index === 0 ? $element.textContent = 'Hoy' : $element.textContent=week[weekday];
@@ -35,5 +38,5 @@ function habdelSelectTabClick(event) {
   const $tabPanelSelect = document.querySelector(`.tabPanel:not([hidden])`);
   $tabPanel.hidden = false;
   $tabPanelSelect.hidden = true;
-
 }
+
