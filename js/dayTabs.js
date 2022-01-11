@@ -28,7 +28,6 @@ function setDataDescription(cord1,cord2){
 
 }
 function habdelSelectDayTabClick(event){
-  console.log(we)
   let $tabSelect = event.target;
   if(!event.path[0].nodeName.startsWith('LI')){
      $tabSelect = event.path[1];

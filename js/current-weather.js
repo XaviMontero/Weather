@@ -27,12 +27,13 @@ function configCurrentWeather(weather) {
   const x = weather.sys.sunrise;
   const y = weather.sys.sunset;
   const sunRiseTime = new Date (x*1000);
+  const stopRiseTime = new Date (y*1000);
   const clima = String(weather.weather[0].id).charAt(0);
 
   setcurrentWeather( $currentWeatherCity, city);
   setcurrentWeather( $currentWeatherDate, formantDate(date));
   setcurrentWeather( $currentWeatherTemp, formatTemp(temp));
-  setBackground($el, statusDay(sunRiseTime,clima));
+  setBackground($el, statusDay(sunRiseTime,stopRiseTime,clima));
   //loader
 }
 
@@ -50,10 +51,13 @@ function showCurrentWeather($el,$loader){
   $loader.hidden = true;
 }
 
-function statusDay(sunRiseTime,clima){
+function statusDay(sunRiseTime,stopRiseTime,clima){
+  console.log(sunRiseTime)
   const currentHours = new Date().getHours();
+  console.log(currentHours)
   const condicionWeather = weatherCondincionCode[clima];
   const pixel = window.matchMedia("(-webkit-min-device-pixel-ratio:2)").matches ? '@2x':'';
- return sunRiseTime  >= currentHours? `morning-${condicionWeather}${pixel}` : `night-${condicionWeather}${pixel}` ;
+
+ return sunRiseTime.getHours()  < currentHours && stopRiseTime.getHours() > currentHours ? `morning-${condicionWeather}${pixel}` : `night-${condicionWeather}${pixel}` ;
 
 }
